@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>글쓰기</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'board/style.css' %}">
+</head>
+<body>
+<h1>글 작성</h1>
+<form method="post">
+    {% csrf_token %}
+    <p>
+        <label for="title">제목</label><br>
+        <input type="text" name="title" id="title" value="{{ post.title|default_if_none:''}}" required>
+    </p>
+    <p>
+        <label for="content">내용</label><br>
+        <textarea name="content" id="content" rows="5" required>{{ post.content|default_if_none:''}}</textarea>
+    </p>
+    <button type="submit">작성하기</button>
+</form>
+<a href="/">← 돌아가기</a>
+</body>
+</html>

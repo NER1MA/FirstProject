@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'board/style.css' %}">
+    <title>게시판</title>
+</head>
+<body>
+    <h1>게시판 목록</h1>
+    <a href="/write/"> 글쓰기</a>
+    <hr>
+    {% for post in posts %}
+        <div class="post">
+            <h2><a href="/post/{{ post.id }}/">{{ post.title }}</a></h2>
+            <p>{{ post.content }}</p>
+            <small>{{ post.created_at }}</small>
+<p>
+    <a href="/post/{{ post.id }}/edit/">✏️ 수정</a> |
+    <a href="/post/{{ post.id }}/delete/" onclick="return confirm('정말 삭제할까요?');">🗑️ 삭제</a>
+</p>
+        </div>
+        <hr>
+    {% empty %}
+        <p>아직 글이 없어요!</p>
+    {% endfor %}
+</body>
+</html>

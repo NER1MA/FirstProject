@@ -5,6 +5,26 @@
     <title>{{ post.title }}</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'board/style.css' %}">
+    <style>
+.comment {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+.comment button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.comment button:hover {
+    background-color: #c0392b;
+}
+</style>
 </head>
 <body>
 <h1>{{ post.title }}</h1>
@@ -12,5 +32,34 @@
 <small>작성일: {{ post.created_at }}</small>
 <br><br>
 <a href="/">← 목록으로 돌아가기</a>
+
+<hr>
+
+<h3>댓글</h3>
+<form method="post">
+    {% csrf_token %}
+    {% if user.is_authenticated %}
+        <p><strong>{{ user.username }}</strong></p>
+        {{ form.content }}
+    {% else %}
+        {{ form.as_p }}
+    {% endif %}
+    <button type="submit">댓글 작성</button>
+</form>
+
+<hr>
+
+{% for comment in comments %}
+    <div class="comment">
+        <strong>{{ comment.author }}</strong> - {{ comment.created_at|date:"Y-m-d H:i" }}<br>
+        <p>{{ comment.content }}</p>
+        <form action="/comment/{{ comment.id }}/delete/" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit">삭제</button>
+        </form>
+    </div>
+{% empty %}
+    <p>아직 댓글이 없습니다.</p>
+{% endfor %}
 </body>
 </html>

@@ -1,41 +1,92 @@
 body {
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'Helvetica Neue', sans-serif;
     max-width: 700px;
     margin: 40px auto;
     padding: 0 20px;
-    background-color: #f4f4f4;
+    background-color: #f9fafb;
+    color: #333;
 }
 
 h1 {
     text-align: center;
-    color: #333;
+    color: #222;
+    font-weight: 600;
 }
 
 a {
-    color: #0077cc;
+    color: #1e90ff;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 a:hover {
     text-decoration: underline;
+    color: #125eb7;
+}
+
+button {
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #125eb7;
 }
 
 .post {
     background: #fff;
-    border: 1px solid #ddd;
+    border: 1px solid #e1e1e1;
     border-radius: 8px;
     padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.post p {
-    color: #555;
-    margin: 10px 0;
+.comment {
+    background-color: #f1f3f5;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    border: 1px solid #d0d7de;
 }
 
-.post small {
-    color: #aaa;
+.comment button {
+    background-color: #e74c3c;
+    margin-top: 5px;
+}
+
+.comment button:hover {
+    background-color: #c0392b;
+}
+
+form {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 80px;
 }
 
 @media (max-width: 768px) {
@@ -48,7 +99,6 @@ a:hover {
 
     h1 {
         font-size: 24px;
-        text-align: center;
     }
 
     h2 {
@@ -57,7 +107,7 @@ a:hover {
 
     .post {
         padding: 15px;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         border-radius: 6px;
     }
 
@@ -65,15 +115,8 @@ a:hover {
         font-size: 15px;
     }
 
-    input, textarea, button {
-        width: 100%;
-        font-size: 1rem;
-        box-sizing: border-box;
-        margin-bottom: 10px;
-    }
-
     form {
-        padding: 10px 0;
+        padding: 10px;
     }
 
     label {

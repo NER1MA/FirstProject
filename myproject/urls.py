@@ -15,14 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from board import views
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.post_list),
+    path('', lambda request: redirect('/board/')),  # Redirect root URL to login page
+    path('', include('account.urls')),
+    path('board/', include('board.urls')),
     path('write/', views.post_create),
     path('post/<int:post_id>/', views.post_detail),
     path('post/<int:post_id>/edit/', views.post_edit),
     path('post/<int:post_id>/delete/', views.post_delete),
+    path('comment/<int:comment_id>/delete/', views.comment_delete, name='comment_delete'),
 ]

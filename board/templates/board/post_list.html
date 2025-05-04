@@ -7,8 +7,21 @@
     <title>게시판</title>
 </head>
 <body>
-    <h1>게시판 목록</h1>
-    <a href="/write/"> 글쓰기</a>
+    <h1>게시판</h1>
+    {% if user.is_authenticated %}
+        <p>👋 {{ user.username }}님, 환영합니다! <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">로그아웃</a>
+        <form id="logout-form" action="/logout/" method="post" style="display: none;">
+            {% csrf_token %}
+        </form>
+        </p>
+    {% else %}
+        <p><a href="/login/">로그인</a> | <a href="/register/">회원가입</a></p>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href="/write/">✍️ 글쓰기</a>
+    {% else %}
+        <a href="/login/">🔐 로그인 후 글쓰기</a>
+    {% endif %}
     <hr>
     {% for post in posts %}
         <div class="post">
@@ -17,7 +30,10 @@
             <small>{{ post.created_at }}</small>
 <p>
     <a href="/post/{{ post.id }}/edit/">✏️ 수정</a> |
-    <a href="/post/{{ post.id }}/delete/" onclick="return confirm('정말 삭제할까요?');">🗑️ 삭제</a>
+    <a href="#" onclick="event.preventDefault(); if(confirm('정말 삭제할까요?')) document.getElementById('delete-form-{{ post.id }}').submit();">🗑️ 삭제</a>
+    <form id="delete-form-{{ post.id }}" action="/post/{{ post.id }}/delete/" method="post" style="display: none;">
+        {% csrf_token %}
+    </form>
 </p>
         </div>
         <hr>

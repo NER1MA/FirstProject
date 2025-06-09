@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from board import views
 from django.shortcuts import redirect
+from board.views import PostListCreateAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,6 @@ urlpatterns = [
     path('post/<int:post_id>/edit/', views.post_edit),
     path('post/<int:post_id>/delete/', views.post_delete),
     path('comment/<int:comment_id>/delete/', views.comment_delete, name='comment_delete'),
+    path('board/api/posts/', PostListCreateAPIView.as_view(), name='api_post_list_create'),
+    path('api/posts/', PostListCreateAPIView.as_view(), name='api_post_list_create_direct'),
 ]

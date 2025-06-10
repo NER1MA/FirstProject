@@ -1,17 +1,18 @@
-from rest_framework import generics
-from .serializers import PostSerializer
-from .serializers import CommentSerializer
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
-# Create your views here.
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Post
-from .models import Comment
-from .forms import CommentForm
+from rest_framework import generics
+from rest_framework.generics import DestroyAPIView
 from rest_framework.permissions import AllowAny
+
+from .forms import CommentForm
+from .models import Comment
+from .models import Post
+from .serializers import CommentSerializer
+from .serializers import PostSerializer
+
+
+# Create your views here.
 
 
 def home(request):
@@ -117,3 +118,8 @@ class CommentListAPIView(generics.ListAPIView):
     def get_queryset(self):
         post_id = self.kwargs['post_id']
         return Comment.objects.filter(post_id=post_id).order_by('-created_at')
+
+class PostDeleteAPIView(DestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = 'id'

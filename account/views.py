@@ -38,13 +38,3 @@ def logout_view(request):
         logout(request)
         return redirect('/board/')
 
-@csrf_exempt
-def login_api(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        user = authenticate(username=data['username'], password=data['password'])
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'message': '로그인 성공', 'username': user.username})
-        else:
-            return JsonResponse({'error': '로그인 실패'}, status=401)

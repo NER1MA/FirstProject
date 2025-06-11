@@ -34,4 +34,5 @@ urlpatterns = [
     path('api/posts/', PostListCreateAPIView.as_view(), name='api_post_list_create_direct'),
     path('api/posts/<int:id>/delete/', PostDeleteAPIView.as_view(), name='post_delete_api'),
     path('api/comments/delete/<int:id>/', CommentDeleteAPIView.as_view(), name='comment-delete'),
+    path('api/comments/', CommentListAPIView.as_view(), name='comment-list'),
 ]

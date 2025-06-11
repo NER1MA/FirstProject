@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/comments/create/', CommentCreateAPIView.as_view(), name='comment-create'),
     path('api/posts/<int:id>/edit/', PostUpdateAPIView.as_view(), name='post_edit_api'),
     path('api/comments/delete/<int:id>/', CommentDeleteAPIView.as_view(), name='comment-delete'),
+    path('api/comments/', CommentListAPIView.as_view(), name='comment-list'),
 ]

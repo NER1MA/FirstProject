@@ -1,3 +1,4 @@
+from rest_framework.generics import DestroyAPIView
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -132,5 +133,12 @@ from rest_framework.generics import UpdateAPIView
 class PostUpdateAPIView(UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    lookup_field = 'id'
+
+
+# REST API view for deleting comments
+class CommentDeleteAPIView(DestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
     lookup_field = 'id'
 

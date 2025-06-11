@@ -119,7 +119,18 @@ class CommentListAPIView(generics.ListAPIView):
         post_id = self.kwargs['post_id']
         return Comment.objects.filter(post_id=post_id).order_by('-created_at')
 
+
 class PostDeleteAPIView(DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     lookup_field = 'id'
+
+
+# REST API view for updating posts
+from rest_framework.generics import UpdateAPIView
+
+class PostUpdateAPIView(UpdateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = 'id'
+
